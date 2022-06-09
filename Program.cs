@@ -1,14 +1,57 @@
-﻿namespace Helloworld
+﻿using System;
+
+namespace Helloworld
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("This works");
+            GetNumberInput(3);
+            int n = int.Parse(Console.ReadLine());
+            GetCharacterInput(n);
+            PopulateWordArray(n);
         }
+
+
+        public static void GetNumberInput(int n)
+        {
+            Console.WriteLine("Please enter a number");
+        }
+
+
+        public static void GetCharacterInput(int n)
+        {
+            Console.WriteLine("please enter {0} words", n);
+        }
+
+
+         public static string [] PopulateWordArray(int n)
+        {
+            string[] wordList = new string[n];
+            for (int i = 0; i < wordList.Length; i++)
+            {
+                string wordinput = Console.ReadLine();
+                if (!wordinput.Any(Char.IsWhiteSpace))  
+                {
+                    wordList[i] = wordinput;
+                }
+                else
+                {
+                    i--;
+                }
+            }
+            return wordList;
+        }
+
+
+        
+
     }
 
 }
+
+
+
 
 
 //// Make a request for the number of total words the array will be have
