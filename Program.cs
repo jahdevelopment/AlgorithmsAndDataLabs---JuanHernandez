@@ -1,54 +1,39 @@
-﻿using System;
+﻿GetNumberInput(3);
+int n = int.Parse(Console.ReadLine());
+GetCharacterInput(n);
+PopulateWordArray(n);
 
-namespace Helloworld
+void GetNumberInput(int n)
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            GetNumberInput(3);
-            int n = int.Parse(Console.ReadLine());
-            GetCharacterInput(n);
-            PopulateWordArray(n);
-        }
-
-
-        public static void GetNumberInput(int n)
-        {
-            Console.WriteLine("Please enter a number");
-        }
-
-
-        public static void GetCharacterInput(int n)
-        {
-            Console.WriteLine("please enter {0} words", n);
-        }
-
-
-         public static string [] PopulateWordArray(int n)
-        {
-            string[] wordList = new string[n];
-            for (int i = 0; i < wordList.Length; i++)
-            {
-                string wordinput = Console.ReadLine();
-                if (!wordinput.Any(Char.IsWhiteSpace))  
-                {
-                    wordList[i] = wordinput;
-                }
-                else
-                {
-                    i--;
-                }
-            }
-            return wordList;
-        }
-
-
-        
-
-    }
-
+    Console.WriteLine("Please enter a number");
 }
+
+
+void GetCharacterInput(int n)
+{
+    Console.WriteLine("please enter {0} words", n);
+}
+
+
+string[] PopulateWordArray(int n)
+{
+    string[] wordList = new string[n];
+    for (int i = 0; i < wordList.Length; i++)
+    {
+        string wordinput = Console.ReadLine();
+        if (!wordinput.Any(Char.IsWhiteSpace))
+        {
+            wordList[i] = wordinput;
+        }
+        else
+        {
+            i--;
+        }
+    }
+    return wordList;
+}
+
+
 
 
 
