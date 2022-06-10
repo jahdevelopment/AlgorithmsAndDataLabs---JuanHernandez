@@ -1,23 +1,23 @@
-﻿GetNumberInput(3);
-int n = int.Parse(Console.ReadLine());
-GetCharacterInput(n);
-PopulateWordArray(n);
+﻿int length = GetNumberInput();
+string[]words = PopulateWordArray(length);
+Char charToCount = GetCharacterInput();
+int charFrequency = CountCharacters(words, charToCount);
+Console.WriteLine($"frequency: {charFrequency}");
+double charPercentage = GetCharacterOcurrencePercentage(words, charToCount);
+Console.WriteLine($"percentage: {charPercentage}");
+PrintResults(charToCount, charFrequency, charPercentage);
 
-void GetNumberInput(int n)
+int GetNumberInput()
 {
     Console.WriteLine("Please enter a number");
+    return Int32.Parse(Console.ReadLine());
 }
 
 
-void GetCharacterInput(int n)
+string[] PopulateWordArray(int length)
 {
-    Console.WriteLine("please enter {0} words", n);
-}
-
-
-string[] PopulateWordArray(int n)
-{
-    string[] wordList = new string[n];
+    string[] wordList = new string[length];
+    Console.WriteLine($"please enter {length} words");
     for (int i = 0; i < wordList.Length; i++)
     {
         string wordinput = Console.ReadLine();
@@ -34,74 +34,81 @@ string[] PopulateWordArray(int n)
 }
 
 
+char GetCharacterInput()
+{
+    Console.WriteLine("Please enter a character");
+    return Char.Parse(Console.ReadLine());
+}
+
+
+int CountCharacters(string[] words, char charToCount)
+{
+    int totalChars = 0;
+    int countedCharacter = 0;  
+    string oneWord = "";
+
+    for (int i = 0; i < words.Length; i++)   
+    {
+        oneWord = string.Join("", words);
+    }
+
+    totalChars += oneWord.Length;
+    
+    for (int i = 0; i < oneWord.Length; i++)  
+    {
+        if (oneWord[i].Equals(charToCount))
+        {
+            countedCharacter++;
+        }
+    }
+    return countedCharacter;
+}
+
+
+double GetCharacterOcurrencePercentage(string[] words, char charToCount)
+{
+    double totalChars = 0;
+    double countedCharacter = 0;
+    string oneWord = "";
+    
+
+    for (int i = 0; i < words.Length; i++)
+    {
+        oneWord = string.Join("", words);
+    }
+
+    totalChars += oneWord.Length;
+    
+    for (int i = 0; i < oneWord.Length; i++)
+    {
+        if (oneWord[i].Equals(charToCount))
+        {
+            countedCharacter++;
+        }
+    }
+
+    double percentage = (countedCharacter / totalChars) * 100;
+
+    return percentage;
+}
+
+
+void PrintResults(char charToCount, int charFrequency, double charPercentage)
+{
+    if (charFrequency == 1)
+    {
+        Console.WriteLine($"\nThe character {charToCount} appears {charFrequency} time in the array.");
+    }
+    else if (charFrequency > 1 && charPercentage < 25)
+    {
+        Console.WriteLine($"\nThe character {charToCount} appears {charFrequency} times in the array.");
+    }
+    else if (charFrequency > 1 && charPercentage >= 25)
+    {
+        Console.WriteLine($"\nThe character {charToCount} appears {charFrequency} times in the array. This letter makes up more than {charPercentage}% of the total number of characters.");
+    }
+}
 
 
 
 
-
-//// Make a request for the number of total words the array will be have
-
-//Console.WriteLine("Please enter a number");
-
-//int n = int.Parse(Console.ReadLine());
-
-//string[] wordList = new string[n];
-
-
-//// get the word list  
-
-//Console.WriteLine("Please enter {0} words", n);
-
-//for (int i = 0; i < wordList.Length; i++)
-//{
-//    string wordInput = Console.ReadLine();
-
-//    if (!wordInput.Any(Char.IsWhiteSpace))  // if the input has no white spaces , add to the "wordInput", else it will ask again 
-//    {
-//        wordList[i] = wordInput;
-//    }
-//    else
-//    {
-//        i--;
-//    }
-//}
-
-//// get the caracter that we want to search in the array
-
-//Console.WriteLine("Please enter a character");
-//char askedCharacter = Console.ReadKey().KeyChar;
-
-//double characterTotal = 0;  // for counting the total of characters in the string
-//double characterCount = 0;  // for counting the total of repetitions of the character that we search into the string
-//string oneWord = "";
-
-//for (int i = 0; i < wordList.Length; i++)   // this for loop joins all the strings in just one single string
-//{
-//    oneWord = string.Join("", wordList);
-//}
-
-//characterTotal += oneWord.Length;
-
-//for (int i = 0; i < oneWord.Length; i++)   // This for loop search the character into the string and counts the times it is repeated
-//{
-//    if (oneWord[i].Equals(askedCharacter))
-//    {
-//        characterCount++;
-//    }
-//}
-
-
-//double percentage = (characterCount / characterTotal) * 100;  // Calculate the percentage of repetitions of the character searched in the string
-
-//if (characterCount == 1)   // if stattemen for setting the results
-//{
-//    Console.WriteLine($"\nThe character {askedCharacter} appears {characterCount} time in the array.");
-//}
-//else if (characterCount > 1 && percentage < 25)
-//{
-//    Console.WriteLine($"\nThe character {askedCharacter} appears {characterCount} times in the array.");
-//}
-//else if (characterCount > 1 && percentage >= 25)
-//{
-//    Console.WriteLine($"\nThe character {askedCharacter} appears {characterCount} times in the array. This letter makes up more than {Math.Round(percentage)}% of the total number of characters.");
-//}
