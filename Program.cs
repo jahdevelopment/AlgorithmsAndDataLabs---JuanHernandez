@@ -6,6 +6,7 @@ string testString = Console.ReadLine();
 
 // With an if statement we first evaluate if the input does not have spaces for continue running the program,
 // otherwise the console will make a comment indicating "Please give me only one word, start again"
+
 if (!testString.Contains(" "))
 {
     Console.WriteLine(IsPalindrome(testString)); // Here we call the funtion below with the return we need to know
@@ -39,15 +40,56 @@ else
 
 ////////////////////*****SECOND PART*****////////////////////////////
 
-char[] DuplicateCharacters(string testString)
+//We request the array of characters to compress and store in a string called "characters"
+Console.WriteLine("Please write the characters");
+string characters = Console.ReadLine();
+
+Console.WriteLine(SearchDuplicates(characters));
+
+/* With this function we are going to select only the duplicate characters and store in a
+new array of chars */
+char[] SearchDuplicates(string characters)
 {
+    /*We take the string we received as a parameter, the letters are converted to upper case
+    and stored in a new array of characters,*/ 
+    char [] repeated = characters.ToUpper().ToCharArray();
 
-    //char [] repeated = new char[];
+    /*With a dictionay we are to organize the information of the characters giving the name 
+    of the characters as a Key and the number of repetitions as Value 
+      */
+    Dictionary<char, int> charAndNumber = new Dictionary<char, int>();
 
-    for(int i = 0; i < testString.Length; i++)
+    //the next for each populate the dictionary with the characters and his number of repetitions
+    foreach (char chars in repeated)
     {
-        
+        if (charAndNumber.ContainsKey(chars))
+        {
+            charAndNumber[chars]++;
+        }
+        else
+        {
+            charAndNumber.Add(chars, 1);
+        }
     }
 
-    return repeated;
+    /*The next array of chars will be storing the characters repeated*/
+    char[] charsOutput = new char[charAndNumber.Count];
+    int counter = 0;
+
+    /*This foreach is for populate the charsOutput array conditionated
+    to the characters present more than once*/ 
+    foreach (KeyValuePair<char, int> kvp in charAndNumber)
+    {
+        if (kvp.Value > 1)
+        {
+            charsOutput[counter] = kvp.Key;
+            counter++;
+        }
+        else
+        {
+            Array.Resize(ref charsOutput, charsOutput.Length - 1);
+        }
+    }
+
+    return charsOutput;
 }
